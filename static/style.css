@@ -1,0 +1,87 @@
+
+
+/* The sidebar menu */
+.sidenav {
+
+  width: 160px; /* Set the width of the sidebar */
+  height: 100%;
+
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  background-color: #111; /* Black */
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 20px;
+  }
+
+.sidenav a{
+  padding: 6px;
+  text-decoration: none;
+  font-size: 30 px;
+  color: #818181;
+  display: block;
+  }
+
+input[type=number]{
+margin-bottom:5px;
+}
+
+
+
+
+
+.main{
+margin-left: 160px
+}
+
+.top_image img {
+margin-left: 150px;
+margin-top: -8px;
+top: 0;
+width: 100%;
+max-height: 30vh;
+
+
+
+}
+
+.top_image {
+
+
+
+
+}
+
+.return_top{
+ display: none; /* Hidden by default */
+  position: fixed; /* Fixed/sticky position */
+  bottom: 20px; /* Place the button at the bottom of the page */
+  right: 30px; /* Place the button 30px from the right */
+  z-index: 99; /* Make sure it does not overlap */
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  background-color: red; /* Set a background color */
+  color: white; /* Text color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  padding: 15px; /* Some padding */
+  border-radius: 10px; /* Rounded corners */
+  font-size: 18px; /* Increase font size */
+}
+
+#return_home{
+position:fixed;
+left: 60%;
+}
+#return_home{
+background-color:#828583;
+color: #ffffff;
+display: inline-block;
+}
+
+a: link {
+color: blue;
+}
+a:visited{
+color: purple
+}

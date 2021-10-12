@@ -1,0 +1,8 @@
+
+<!DOCTYPE html>
+<title> Welcome to the test website</title>
+
+<link rel="stylesheet" type = "text/css" href="{{ url_for('static', filename='style.css')}}">
+<!--- call function url_for() instead of address such as /profile/<name> so template doesn't break if i move css location --->
+
+<h1>Hey there {{ name }}</h1>

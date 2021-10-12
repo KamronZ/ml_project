@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+
+<link rel="stylesheet" type = "text/css" href="{{ url_for('static', filename='style.css')}}">
+
+    <div class = "top_image">
+<img src="/static/images/machine.png" />
+</div>
+
+<!--- sidebar --->
+<div class="sidenav">
+    <a href= "diabetes_notebook"  >Juptyer Notebook</a>
+    <a href="#" >Sources </a>
+    <a href="#" >Graphs </a>
+
+</div>
+
+
+<div class="main">
+
+
+    <div class ="title">
+<h1> Machine Learning: Diabetes Mellitus</h1>
+</div>
+    <body>
+    <h3>Random Forest Classifier</h3>
+
+<!--- input forms --->
+<div>
+  <form action="/predict" method="POST">
+    <label for="age">Age</label>
+    <input type="number" step="1" max = 100 min = 10 id="age" name="age" required>
+    <br>
+    <label for="glucose">Glucose mg/dL</label>
+    <input type="number" step="1" max = 500 min = 20 id="glucose" name="glucose" required>
+    <br>
+    <label for="numpreg">Number of Pregnancies</label>
+    <input type="number" step="1" max = 10 min = 0 id="numpreg" name="numpreg" required>
+    <br>
+    <label for="BMI">BMI (body mass index)</label>
+
+    <input type="number" step=".1" max = 80 min = 4 id="BMI" name="BMI" required>
+      <a href="https://www.mayoclinic.org/diseases-conditions/obesity/in-depth/bmi-calculator/itt-20084938" target="_blank"> Click here</a> to learn how to calculate BMI.
+    <br>
+
+
+    <label for="diastolic">Diastolic blood pressure (bottom number)</label>
+    <input type="number" step="1" max = 200 min = 40 id="diastolic" name="diastolic" required>
+    <br>
+    <br>
+
+    <input type="submit" value="Submit">
+  </form>
+</div>
+</body>
+    testing some stuff
+</div>

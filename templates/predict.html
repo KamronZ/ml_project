@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+
+<html>
+   <body>
+        {% if prediction == 0 %}
+
+       <h1> Likely not diabetic.  Confidence level: {{probability[0] * 100}}%</h1>
+        {% else %}
+        <h1>Likely diabetic. Confidence levels: {{probability[1] * 100}}%</h1>
+        {% endif %}
+   </body>
+</html>
