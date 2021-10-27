@@ -1,8 +1,15 @@
+import flask
 from flask import Flask, request, render_template, request
 import numpy as np
 import pickle
+import dash
+from dash import html
 
-flask_app = Flask(__name__)
+import dash_app
+
+server = Flask(__name__)
+app = dash.Dash(__name__, server=server, url_base_pathname='/dash_app/')
+app.layout = dash_app.launch()
 
 
 def ValuePredictor(prediction_list):
@@ -19,7 +26,7 @@ def ProbabilityPredictor(prediction_list):
     return result[0]
 
 
-@flask_app.route("/predict", methods=['POST'])
+@server.route("/predict", methods=['POST'])
 def predict():
     if request.method == 'POST':
         to_predict = request.form.to_dict()  # pull information from forms as dict entries
@@ -33,12 +40,12 @@ def predict():
         return render_template("predict.html", prediction=prediction, probability=probability)
 
 
-@flask_app.route("/")
+@server.route("/")
 def index():
     return render_template("index.html")
 
 
-@flask_app.route("/login", methods=['GET', 'POST'])
+@server.route("/login", methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
 
@@ -50,15 +57,15 @@ def login():
 
 
 
-@flask_app.route("/diabetes_notebook")
+@server.route("/diabetes_notebook")
 def diabetes_notebook():
     return render_template("diabetes_notebook.html")
 
 
-@flask_app.route("/data_visualization")
-def data_visualization():
-    return render_template("data_visualization.html")
+@server.route("/data_visualization")
+def dash_chart():
+    return flask.redirect('/dash_app')
 
 
 if __name__ == "__main__":
-    flask_app.run(debug=True)
+    server.run(debug=True)
