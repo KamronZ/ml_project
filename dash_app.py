@@ -2,8 +2,8 @@ import dash
 from dash import dcc
 from dash import html
 import plotly.graph_objects as go
-
 import pandas as pd
+import numpy as np
 
 diabetes_untouched = pd.read_csv("data/diabetes.csv")
 df = diabetes_untouched
@@ -33,6 +33,15 @@ model_performance.add_trace(go.Bar(x=scoring_metrics,
                             name="Naive Bayes",
                             marker_color= 'rgb(39, 180, 102)'
                             ))
+records_table = go.Figure(data=[go.Table(
+    header=dict(values=list(df.columns),
+                fill_color='lightgray',
+                align='left'),
+    cells=dict(values=[df.Pregnancies,df.Glucose,df.BloodPressure,df.SkinThickness,df.Insulin,df.BMI,
+               df.DiabetesPedigreeFunction,df.Age, df.Outcome],
+               fill_color='lightskyblue',
+               align='left'))
+])
 
 
 model_performance.update_layout(
@@ -48,13 +57,18 @@ model_performance.update_layout(
     bargap=0.15,
     bargroupgap=0.1
 )
-
-data_symmetry = go.Figure(data=[go.Bar(
-    x=x, y=y,
-    text=y,
-    textposition='auto',
-    marker_color= 'rgb(39, 110, 102)'
-)])
+diabetic = [""]
+data_symmetry = go.Figure()
+data_symmetry.add_trace(go.Bar(x=diabetic,
+                            y=[negative],
+                            name= "Not Diabetic",
+                            marker_color= 'rgb(57, 153, 69)'
+                            ))
+data_symmetry.add_trace(go.Bar(x=diabetic,
+                            y=[positive],
+                            name= "Diabetic",
+                            marker_color= 'rgb(246, 238, 91)'
+                            ))
 data_symmetry.update_layout(
     xaxis_tickfont_size=14,
     yaxis=dict(
@@ -70,10 +84,22 @@ data_symmetry.update_layout(
 
 
 
+
+
+
+
+
+
+
+
 def launch():
     app = dash.Dash()
 
     app.layout = html.Div([
+        html.H1("Data Pre-Imputation", style={'textAlign': 'center', 'margin-left': '80px'}),
+        html.Div("",
+                 style={'margin-left': '80px', 'margin-right': '80px', 'font-size': '20px'}),
+        dcc.Graph(figure=records_table),
         html.H1("Data Symmetry", style={'textAlign': 'center', 'margin-left' : '80px'}),
 
         html.Div("Important to notice that the data of the records is not symmetrical."
