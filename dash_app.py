@@ -18,10 +18,21 @@ y = [negative, positive]
 scoring_metrics = ["accuracy", 'precision','recall','f1']
 
 model_performance = go.Figure()
+
+model_performance.add_trace(go.Bar(x=scoring_metrics,
+                            y=[79,76,61,68],
+                            name="RFC Tuned With Grid Search",
+                            marker_color= 'rgb(100, 99, 69)'
+                            ))
 model_performance.add_trace(go.Bar(x=scoring_metrics,
                             y=[76,65,59,62],
-                            name="real world w/ grid search",
+                            name="Real World RFC Tuned With Grid Search",
                             marker_color= 'rgb(204, 81, 39)'
+                            ))
+model_performance.add_trace(go.Bar(x=scoring_metrics,
+                            y=[81,79,65,71],
+                            name="RFC using identified important features",
+                            marker_color= 'rgb(302, 105, 100)'
                             ))
 model_performance.add_trace(go.Bar(x=scoring_metrics,
                             y=[75,64,53,58],
@@ -32,6 +43,11 @@ model_performance.add_trace(go.Bar(x=scoring_metrics,
                             y=[77,67,59,62],
                             name="Naive Bayes",
                             marker_color= 'rgb(39, 180, 102)'
+                            ))
+model_performance.add_trace(go.Bar(x=scoring_metrics,
+                            y=[73,58,61,60],
+                            name="Real World Naive Bayes",
+                            marker_color= 'rgb(75, 255, 75)'
                             ))
 records_table = go.Figure(data=[go.Table(
     header=dict(values=list(df.columns),
@@ -96,6 +112,7 @@ def launch():
     app = dash.Dash()
 
     app.layout = html.Div([
+        # html.Button('Return Home',id = "return_home",onclick="window.location.href='/';"),
         html.H1("Data Pre-Imputation", style={'textAlign': 'center', 'margin-left': '80px'}),
         html.Div("",
                  style={'margin-left': '80px', 'margin-right': '80px', 'font-size': '20px'}),
@@ -109,7 +126,17 @@ def launch():
                  style={'margin-left' : '80px', 'margin-right' : '80px', 'font-size' : '20px'}),
         dcc.Graph(figure=data_symmetry),
         html.H1("Model Comparison",style={'textAlign': 'center', 'margin-left' : '80px'}),
-        dcc.Graph(figure=model_performance)
+        dcc.Graph(figure=model_performance),
+        html.Div("Best performers were Random Forest Classifier (RFC) and Naive Bayes (Guassian)."
+                 " We can see that the best performer is RFC which uses only the identified important features, however"
+                 " this was not the chosen winning model.  This model required the following features: number of pregnancies,"
+                 " triceps skin-fold thickness, insulin levels, BMI, and diabetes pedigree function. "
+                 " We do not feel these qualify as readily available biometrics for the average user and therefore concluded"
+                 " this model to be unsable at this time.   Secondly, we can see Naive Bayes as a strong contender, however"
+                 " it suffered a drastic decrease in prediction quality after reducing the available biometrics.  In the end,"
+                 " the tuned RFC (via grid search) performed the best after working with reduced biometrics. ",
+                 style={'margin-left': '80px', 'margin-right': '80px', 'font-size': '20px'}
+                 )
 
 
     ])
