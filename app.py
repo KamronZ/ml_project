@@ -1,9 +1,9 @@
 import flask
-from flask import Flask, request, render_template, request
+from flask import Flask, render_template, request
 import numpy as np
 import pickle
 import dash
-from dash import html
+
 
 import dash_app
 
@@ -24,8 +24,6 @@ def ProbabilityPredictor(prediction_list):
     model = pickle.load(open('models/winning_model', 'rb'))
     result = model.predict_proba(to_predict)
     return result[0]
-
-
 
 
 @server.route("/predict", methods=['POST'])
@@ -54,9 +52,6 @@ def login():
         return "you are using POST"
     else:
         return "you are using get"
-
-
-
 
 
 @server.route("/diabetes_notebook")
