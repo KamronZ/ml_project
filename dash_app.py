@@ -111,8 +111,11 @@ data_symmetry.update_layout(
 def launch():
     app = dash.Dash()
 
+
     app.layout = html.Div([
-        # html.Button('Return Home',id = "return_home",onclick="window.location.href='/';"),
+        html.A(html.Button('Return Home'),
+               href='/'),
+
         html.H1("Data Pre-Imputation", style={'textAlign': 'center', 'margin-left': '80px'}),
         html.Div("",
                  style={'margin-left': '80px', 'margin-right': '80px', 'font-size': '20px'}),
@@ -134,12 +137,15 @@ def launch():
                  " We do not feel these qualify as readily available biometrics for the average user and therefore concluded"
                  " this model to be unsable at this time.   Secondly, we can see Naive Bayes as a strong contender, however"
                  " it suffered a drastic decrease in prediction quality after reducing the available biometrics.  In the end,"
-                 " the tuned RFC (via grid search) performed the best after working with reduced biometrics. ",
+                 " the tuned RFC (via grid search) using real world accessible data, performed the best after working with reduced biometrics. ",
                  style={'margin-left': '80px', 'margin-right': '80px', 'font-size': '20px'}
                  )
-
-
     ])
+
+
+
+
+
 
     if __name__ == '__main__':
         app.run_server(debug=True)

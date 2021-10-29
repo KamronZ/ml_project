@@ -26,6 +26,8 @@ def ProbabilityPredictor(prediction_list):
     return result[0]
 
 
+
+
 @server.route("/predict", methods=['POST'])
 def predict():
     if request.method == 'POST':
