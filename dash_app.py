@@ -3,7 +3,7 @@ from dash import dcc
 from dash import html
 import plotly.graph_objects as go
 import pandas as pd
-import numpy as np
+
 
 diabetes_untouched = pd.read_csv("data/diabetes.csv")
 df = diabetes_untouched
@@ -137,19 +137,20 @@ def launch():
         dcc.Graph(figure=records_table),
         html.H1("Data Symmetry", style={'textAlign': 'center', 'margin-left' : '80px'}),
 
-        html.Div("Important to notice that the data of the records is not symmetrical."
-                 "  This plays an important role in deciding how to score or classification model"
+        html.Div("Important to notice that the data of the records is not symmetrical.   There are signicantly more records"
+                 " not having diabetes (500) to that do (268)"
+                 "  This plays an important role in deciding how to score the various classification models"
                  " and demonstrates that an accuracy score will not be a particularly good indicator for how"
                  " well the model is performing.  In these cases, a precision score is also important.",
                  style={'margin-left' : '80px', 'margin-right' : '80px', 'font-size' : '20px'}),
         dcc.Graph(figure=data_symmetry),
         html.H1("Model Comparison",style={'textAlign': 'center', 'margin-left' : '80px'}),
         dcc.Graph(figure=model_performance),
-        html.Div("Here are the  top performing models. 'Real World' models consist of the models that are working with"
+        html.Div("Here are the  top performing models. 'Real World' models consist of the models that are working with "
                  "only the features deemed accessible to the average user (number of pregnacies, age, BMI, "
                  "Insulin levels, and "
                  " diastolic blood pressure).  Therefore, the  Real World Gradient Boosting Classifier model comes out ahead,"
-                 " as it scores better scores across every performance metric."
+                 " as it scores better across every performance metric."
                  "",
                  style={'margin-left': '80px', 'margin-right': '80px', 'font-size': '20px'}
                  )
